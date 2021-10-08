@@ -1,1 +1,10 @@
+The strategy tracing dataset is a set of actions that the agents perform at every timestep of the simulation
 
+In every hour of the simulation, it showed how the agent's action has an effect on the cost.
+
+in the strategy tracing table, there are variables 
+State --> the state consist of the current net load of the system at the different timesteps, 
+action --> the action the agent takes at each timestep
+cost --> the total cost of the operation in the microgrid at each timestep.
+Load --> the current electrical load of the system.
+pv --> the current solar pv generation in the system.
