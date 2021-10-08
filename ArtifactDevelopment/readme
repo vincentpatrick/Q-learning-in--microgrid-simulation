@@ -1,0 +1,3 @@
+this files can be runned using google colab.
+Everyday, the dataset changes when using the pymgrid package.
+if the training of the agent encounters an error, simply decrease the number of horizon set for the agents training
