@@ -1,0 +1,34 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 1.3em;
+    height: 100vh;
+}
+h1 {
+    margin: 0 auto;
+    font-size: 2.2em;
+    text-align: center;
+    font-size: 10em;
+}
+
+.main-container,.search-component{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2em;
+}
+
+.text-search{
+    width: 100%;
+    max-width: 280px;
+    padding: 10px 15px;
+    border: solid blueviolet;
+    color: #313131;
+    font-size: 20px;
+    font-weight: 300;
+    transition: 0.2s ease-out;
+}
+
+.button-search{
+   font-size: 32px;
+}

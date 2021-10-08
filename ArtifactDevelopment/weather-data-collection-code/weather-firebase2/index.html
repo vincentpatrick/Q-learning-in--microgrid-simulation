@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>OpenWeatherMap Api</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- <div class="main">
+    <div class="header">
+      <h1>OpenWeatherMap API</h1>
+      <p>Enter any city name in the input box below to get the data</p>
+    </div> -->
+  
+    <div class="input">
+      <input type="text" placeholder="Enter the city" class="input_text">
+      <input type="submit" value="Submit" class="submit">
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="card">
+      <h1 class="name" id="name"></h1>
+      <p class="date"></p>
+      <p class="temp"></p>
+      <p class="temp_min"></p>
+      <p class="temp_max"></p>
+      <p class="pressure"></p>
+      <p class="humidity"></p>
+      <p class="clouds"></p>
+      <p class="desc"></p>
+    </div>
+  </div>
+
+<script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-database.js"></script> 
+
+<script id = "MainScript">
+//-------------------------------CONFIGURATION--------------------------------------
+      var firebaseConfig = {
+          apiKey: "AIzaSyCiaGBC09ZygJaAFt2PDtQRLyazTxSAWdo",
+          authDomain: "weather-data-collection-bea13.firebaseapp.com",
+          databaseURL: "https://weather-data-collection-bea13-default-rtdb.asia-southeast1.firebasedatabase.app",
+          projectId: "weather-data-collection-bea13",
+          storageBucket: "weather-data-collection-bea13.appspot.com",
+          messagingSenderId: "777724150682",
+          appId: "1:777724150682:web:61080a4820700f21517023",
+          measurementId: "G-YLR40934XY"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+//-------------------------------Ready Data--------------------------------------
+      var input = document.querySelector('.input_text');
+      var main = document.querySelector('#name');
+      var temp = document.querySelector('.temp');
+      var temp_min = document.querySelector('.temp_min');
+      var temp_max = document.querySelector('.temp_max');
+      var pressure = document.querySelector('.pressure');
+      var humidity = document.querySelector('.humidity');
+      var desc = document.querySelector('.desc');
+      var clouds = document.querySelector('.clouds');
+      var date = document.querySelector('.date');
+      var button= document.querySelector('.submit');
+      //create a rootnode for firebase
+      const rootRef = firebase.database().ref('temperature/')
+
+
+
+      //get the current date when the data is obtained
+      var today = new Date();
+              var dd = String(today.getDate()).padStart(2, '0');
+              var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+              var yyyy = today.getFullYear();
+              today = mm + '/' + dd + '/' + yyyy;
+
+
+              
+      // button listen to aclick, in the click it runs a function
+      button.addEventListener('click', function(name){
+          fetch('https://api.openweathermap.org/data/2.5/weather?q='+input.value+'&appid=a51555a7cef91a68f44e602a900f355d')
+          .then(response => response.json())
+          //.then(data => console.log(data))
+          .then(data => { //store the data
+              //convert temperatures from kelvin to celsius by subtracting with -273.15
+              var tempValue = data['main']['temp']-273.15;
+              var temp_minValue = data['main']['temp_min']-273.15;
+              var temp_maxValue = data['main']['temp_max']-273.15;
+              var pressureValue = data['main']['pressure'];
+              var humidityValue = data['main']['humidity'];
+              var nameValue = data['name'];
+              var descValue = data['weather'][0]['description'];
+            
+              main.innerHTML = nameValue;
+              date.innerHTML = "Date : "+today;
+              desc.innerHTML = "Desc : "+descValue;
+              temp.innerHTML = "Temperature : "+tempValue.toFixed(2);
+              temp_min.innerHTML = "Temperature (minimum) : "+temp_minValue.toFixed(2);
+              temp_max.innerHTML = "Temperature (maximum) : "+temp_maxValue.toFixed(2);
+              pressure.innerHTML = "pressure : "+pressureValue.toFixed(2)
+              humidity.innerHTML = "Humidity : "+humidityValue.toFixed(2)
+              
+              const autoId = rootRef.push().key//create an auto id,therefore data can be added instantly into a new child node seperated from previous data
+              rootRef.child(autoId).set({ //from the root node, generate a new child with the new data.
+                  Date_Of_Data: today,
+                  Temperature : tempValue.toFixed(2),
+                  minimum_Temperature : temp_minValue.toFixed(2),
+                  maximum_Temperature: temp_maxValue.toFixed(2),
+                  pressure : pressureValue.toFixed(2),
+                  Humidity : humidityValue.toFixed(2)
+              });
+          
+            })
+
+      .catch(err => alert("Wrong city name!")); //if city doesnt exist, catch it
+     
+    })
+
+</script>
+
+</body>
+</html>

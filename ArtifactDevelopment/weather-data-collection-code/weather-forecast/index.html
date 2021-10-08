@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Current Weather</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,900" rel="stylesheet">
+  <link href="style.css" rel="stylesheet"> 
+</head>
+<body>
+    <div class="search-component">
+        <input type="text" autocomplete="off" class="text-search" placeholder="Type the City Name..." >
+        <input type="button" class="button-search" value="Search">
+    </div>
+
+    <div class="main-container">
+        <div>
+            <div id="description"></div>
+            <h1 id="temp"></h1>
+            <div id="location"></div>
+        </div>
+    <div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-database.js"></script> 
+    <script src="forecast.js"></script>
+</body>
+</html>
