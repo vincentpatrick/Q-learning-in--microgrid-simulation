@@ -1,7 +1,0 @@
-Q-learning Algorithm
-
-1. Simulating Microgrid Virtual Environment
-
-I start by installing pYmgrid(a python microgrid) library. 
-Pymgrid is used to generate and simulate Microgrids
-
