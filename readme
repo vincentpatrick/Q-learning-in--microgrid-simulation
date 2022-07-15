@@ -1,9 +1,7 @@
+Q-learning Algorithm
 
+1. Simulating Microgrid Virtual Environment
 
-the files on all experiments can be run using google colab.
-Everyday, the dataset changes when using the pymgrid package.
-if the training of the agent encounters an error, simply decrease the number of horizon set for the agents training
+I start by installing pYmgrid(a python microgrid) library. 
+Pymgrid is used to generate and simulate Microgrids
 
-
-This baseline and experimental algorithm is built based on the Q-learning algorithm made by Total-RD.
-The link to TotalRD's code is: https://github.com/Total-RD/pymgrid
